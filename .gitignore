@@ -1,0 +1,7 @@
+*.*
+!mockup/*
+!SQL/tietokannan-alustus.sql
+!.gitignore
+!fetcher.py
+!getter.py
+!mockuphelper.py
