@@ -38,8 +38,7 @@ def haeRavintoloidenMenut():
 
         palautus['MenusForDays'] = [{'Date' : paivamaara, 'SetMenus' : SetMenus}]
         kaikkiRavintolat.append(palautus)
-
-    print(kaikkiRavintolat)
+        
     return kaikkiRavintolat
 
 haeRavintoloidenMenut()

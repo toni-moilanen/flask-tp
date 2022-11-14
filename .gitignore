@@ -1,7 +1,10 @@
 *.*
+/venv
+/__pycache__
 !mockup/*
 !SQL/tietokannan-alustus.sql
 !.gitignore
 !fetcher.py
 !getter.py
 !mockuphelper.py
+!flask-app.py
