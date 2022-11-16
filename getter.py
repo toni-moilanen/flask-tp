@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 def haeRavintoloidenMenut():
     tietokanta_yhteys = sqlite3.connect("./SQL/semma-db.db")
@@ -31,7 +32,7 @@ def haeRavintoloidenMenut():
         SetMenus = []
 
         for (menu_id, tyyppi, hinta) in yksittaiset_ruoat:
-            kursori.execute('SELECT nimi FROM Ruoankomponentti where menu_id=?', (menu_id, ))
+            kursori.execute('SELECT komponentti FROM Ruoankomponentti where menu_id=?', (menu_id, ))
             komponentit = kursori.fetchall()
             SetMenu = ({'Name' : tyyppi, 'Price': hinta, 'Components' : tuplesToStrings(komponentit)})
             SetMenus.append(SetMenu)
@@ -41,4 +42,4 @@ def haeRavintoloidenMenut():
         
     return kaikkiRavintolat
 
-haeRavintoloidenMenut()
+print(json.dumps(haeRavintoloidenMenut(), indent=2))

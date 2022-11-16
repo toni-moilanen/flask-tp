@@ -54,7 +54,7 @@ for (ravintola_id, url) in ravintolat:
                 #print(ruoankomponentti)
                 kursori.execute('''
                     INSERT INTO Ruoankomponentti
-                    (menu_id, nimi)
+                    (menu_id, komponentti)
                     VALUES (?, ?)''',
                     (menu_id, ruoankomponentti,))
 
