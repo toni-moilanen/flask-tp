@@ -42,4 +42,4 @@ def haeRavintoloidenMenut():
         
     return kaikkiRavintolat
 
-print(json.dumps(haeRavintoloidenMenut(), indent=2))
+#print(json.dumps(haeRavintoloidenMenut(), indent=2))

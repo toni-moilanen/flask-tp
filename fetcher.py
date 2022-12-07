@@ -1,21 +1,32 @@
 import sqlite3
-from mockuphelper import haeMockup
-#from urllib.request import Request, urlopen
-#import json
+#from mockuphelper import haeMockup
+from urllib.request import Request, urlopen
+import json
+import os
 
-tietokanta_yhteys = sqlite3.connect("./SQL/semma-db.db")
-kursori = tietokanta_yhteys.cursor()
+#Alustetaan tietokanta tarvittaessa
+if os.path.exists('./SQL/semma-db.db'):
+    tietokanta_yhteys = sqlite3.connect("./SQL/semma-db.db")
+    kursori = tietokanta_yhteys.cursor()
+else:
+    with open('./SQL/tietokannan-alustus.sql', 'r') as alustus_tiedosto:
+        sql_skripti = alustus_tiedosto.read()
+    tietokanta_yhteys = sqlite3.connect('./SQL/semma-db.db')
+    kursori = tietokanta_yhteys.cursor()
+    kursori.executescript(sql_skripti)
+    tietokanta_yhteys.commit()
+    print("Tietokanta luotiin")
 
 kursori.execute('SELECT ravintola_id, ravintola_url FROM Ravintola')
 ravintolat = kursori.fetchall()
 
 #TODO: tiedon haku palvelimelta mockup-datan sijaan...
 def hae(url):
-    return haeMockup(url)
-    #pyynto = Request(url)
-    #pyynto.add_header('User-Agent', 'Minun py skripti')
-    #sisalto = urlopen(pyynto)
-    #return json.load(sisalto)
+    #return haeMockup(url)
+    pyynto = Request(url)
+    pyynto.add_header('User-Agent', 'Minun py skripti')
+    sisalto = urlopen(pyynto)
+    return json.load(sisalto)
 
 for (ravintola_id, url) in ravintolat:
     data = hae(url)
